@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Você ❤️</title>
+    <title>Nosso Amor ❤️</title>
     <style>
         body {
             display: flex;
@@ -14,23 +14,23 @@
             margin: 0;
             background-color: #fff0f3;
             font-family: 'Arial', sans-serif;
-            overflow: hidden;
+            overflow: hidden; /* Evita scroll durante a explosão */
+            text-align: center;
         }
 
-        /* Animação do Coração Inicial */
         .heart-main {
-            font-size: 100px;
-            animation: pulse 1.5s infinite;
+            font-size: 80px;
+            animation: pulse 1.2s infinite;
+            cursor: default;
         }
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
 
         button {
-            margin-top: 20px;
             padding: 15px 30px;
             font-size: 18px;
             background-color: #ff4d6d;
@@ -38,80 +38,54 @@
             border: none;
             border-radius: 25px;
             cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+            margin-top: 20px;
+            z-index: 10;
         }
 
-        button:hover { background-color: #ff758f; }
-
-        /* Medidor de Amor */
         #container-medidor {
             display: none;
-            width: 80%;
-            max-width: 300px;
+            width: 250px;
             background: #ddd;
             border-radius: 20px;
             margin-top: 20px;
             overflow: hidden;
         }
 
-        #barra-progresso {
+        #barra {
             width: 0%;
-            height: 30px;
-            background: linear-gradient(to right, #ff4d6d, #ff0000);
-            text-align: center;
-            line-height: 30px;
+            height: 25px;
+            background: #ff4d6d;
             color: white;
+            line-height: 25px;
             font-weight: bold;
         }
 
-        #mensagem-final {
+        #mensagem {
             display: none;
+            margin-top: 20px;
             font-size: 24px;
             color: #ff4d6d;
-            margin-top: 20px;
-            text-align: center;
             font-weight: bold;
+            animation: pop 0.5s cubic-bezier(0.17, 0.89, 0.32, 1.49);
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); }
+            100% { transform: scale(1.2); }
+        }
+
+        /* Estilo das partículas da explosão */
+        .coracao-particula {
+            position: absolute;
+            pointer-events: none;
+            font-size: 20px;
+            z-index: 5;
         }
     </style>
 </head>
 <body>
 
     <div class="heart-main">❤️</div>
-    
-    <button id="btnClick" onclick="iniciarMedidor()">Clique para medir meu amor</button>
 
-    <div id="container-medidor">
-        <div id="barra-progresso">0%</div>
-    </div>
-
-    <div id="mensagem-final">❤️ O AMOR ESTOROU! 100% ❤️</div>
-
-    <script>
-        function iniciarMedidor() {
-            const btn = document.getElementById('btnClick');
-            const container = document.getElementById('container-medidor');
-            const barra = document.getElementById('barra-progresso');
-            const mensagem = document.getElementById('mensagem-final');
-
-            btn.style.display = 'none';
-            container.style.display = 'block';
-
-            let largura = 0;
-            const intervalo = setInterval(() => {
-                if (largura >= 100) {
-                    clearInterval(intervalo);
-                    mensagem.style.display = 'block';
-                    // Pequena animação de "estouro"
-                    mensagem.style.transform = 'scale(1.5)';
-                    mensagem.style.transition = '0.5s';
-                } else {
-                    largura++;
-                    barra.style.width = largura + '%';
-                    barra.innerHTML = largura + '%';
-                }
-            }, 30); // Velocidade do medidor
-        }
-    </script>
-</body>
-</html>
+    <button id="btn" onclick="explodirAmor()">
+        Clique para ver o amor de [Seu Nome] & [Nome Dela]
