@@ -3,197 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Emanuelly ❤️</title>
+    <title>Para Você ❤️</title>
     <style>
-        :root {
-            --rosa-fundo: #ffe5ec;
-            --rosa-envelope: #ff758f;
-            --rosa-aba: #ff8fa3;
-            --cor-detalhe: #ff4d6d;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
-            height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            background-color: var(--rosa-fundo);
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fff0f3;
             font-family: 'Arial', sans-serif;
             overflow: hidden;
         }
 
-        /* Corações caindo */
-        .heart {
-            position: absolute;
-            top: -20px;
-            color: var(--cor-detalhe);
-            font-size: 20px;
-            animation: fall linear forwards;
-            z-index: 1;
+        /* Animação do Coração Inicial */
+        .heart-main {
+            font-size: 100px;
+            animation: pulse 1.5s infinite;
         }
 
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
 
-        /* Container do Envelope */
-        .container {
-            position: relative;
-            width: 320px;
-            height: 220px;
+        button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            border-radius: 25px;
             cursor: pointer;
-            z-index: 10;
-        }
-
-        /* Corpo do Envelope */
-        .envelope {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background-color: var(--rosa-envelope);
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            z-index: 5;
-        }
-
-        /* Efeito de dobras do envelope */
-        .envelope::before {
-            content: "";
-            position: absolute;
-            z-index: 6; /* Fica acima da carta quando fechado */
-            border-left: 160px solid var(--rosa-aba);
-            border-top: 110px solid transparent;
-            border-bottom: 110px solid transparent;
-            left: 0;
-        }
-
-        .envelope::after {
-            content: "";
-            position: absolute;
-            z-index: 6; /* Fica acima da carta quando fechado */
-            border-right: 160px solid var(--rosa-aba);
-            border-top: 110px solid transparent;
-            border-bottom: 110px solid transparent;
-            right: 0;
-        }
-
-        /* Aba Superior */
-        .lid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 160px solid transparent;
-            border-right: 160px solid transparent;
-            border-top: 120px solid var(--rosa-envelope);
-            transform-origin: top;
-            transition: transform 0.6s ease;
-            z-index: 10;
-        }
-
-        /* Papel da Carta */
-        .card {
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            width: 290px;
-            height: 200px;
-            background: white;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.7s ease, z-index 0.7s;
-            z-index: 4; /* Começa atrás das dobras */
-            border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        .foto-perfil {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--cor-detalhe);
-            margin-bottom: 10px;
-        }
-
-        .card h2 { font-size: 1.2rem; color: var(--cor-detalhe); margin-bottom: 8px; }
-        .card p { font-size: 0.9rem; color: #444; line-height: 1.4; }
-
-        /* Selo de Coração */
-        .seal {
-            position: absolute;
-            top: 110px;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 40px;
-            z-index: 11;
             transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
         }
 
-        /* ANIMAÇÕES AO ABRIR (A MÁGICA ESTÁ AQUI) */
-        .container.open .lid { 
-            transform: rotateX(180deg); 
-            z-index: 1; 
-        }
-        
-        .container.open .card { 
-            transform: translateY(-160px); 
-            z-index: 20; /* AGORA ELA SOBE ACIMA DE TUDO */
-        }
-        
-        .container.open .seal { 
-            opacity: 0; 
-            pointer-events: none; 
+        button:hover { background-color: #ff758f; }
+
+        /* Medidor de Amor */
+        #container-medidor {
+            display: none;
+            width: 80%;
+            max-width: 300px;
+            background: #ddd;
+            border-radius: 20px;
+            margin-top: 20px;
+            overflow: hidden;
         }
 
-        .tap-text {
-            position: absolute;
-            bottom: -50px;
-            width: 100%;
+        #barra-progresso {
+            width: 0%;
+            height: 30px;
+            background: linear-gradient(to right, #ff4d6d, #ff0000);
             text-align: center;
-            color: var(--cor-detalhe);
+            line-height: 30px;
+            color: white;
             font-weight: bold;
-            letter-spacing: 1px;
+        }
+
+        #mensagem-final {
+            display: none;
+            font-size: 24px;
+            color: #ff4d6d;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <div class="container" onclick="this.classList.toggle('open')">
-        
-        <div class="lid"></div>
-        <div class="seal">❤️</div>
-        
-        <div class="envelope">
-            <div class="card">
-                <img src="https://scontent.cdninstagram.com/v/t1.15752-9/627632126_2065461537574183_9167825963899108894_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=108&ccb=7-5&_nc_sid=fc17b8&efg=eyJxZV9ncm91cHMiOlsiaWdkX2Jlc3RfZWZmb3J0X2ltYWdlOnRlc3QiXX0%3D&_nc_ohc=Ua8A42dn5-UQ7kNvwEzWG9M&_nc_oc=AdmiEFuFl9SNTQ_qsX976Ntevo2X2lGDDONWJdVPHM6mVm5FDPy292TdLdU7s3nB9s5cmo4tfsDAtUP-DjH77xPi&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&oh=03_Q7cD4gHRmg9qfC_GTWTblv7gbtl8QpegPsUfCN8rifs5WPc0_Q&oe=69B35B08" alt="Emanuelly" class="foto-perfil">
-                
-                <h2>Para Emanuelly ❤️</h2>
-                <p>Eu queria algo especial para te mostrar o quanto eu gosto de você.</p>
-                <p><strong>Você é o meu melhor presente!</strong></p>
-            </div>
-        </div>
+    <div class="heart-main">❤️</div>
+    
+    <button id="btnClick" onclick="iniciarMedidor()">Clique para medir meu amor</button>
 
-        <p class="tap-text">CLIQUE PARA ABRIR</p>
+    <div id="container-medidor">
+        <div id="barra-progresso">0%</div>
     </div>
 
+    <div id="mensagem-final">❤️ O AMOR ESTOROU! 100% ❤️</div>
+
     <script>
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
+        function iniciarMedidor() {
+            const btn = document.getElementById('btnClick');
+            const container = document.getElementById('container-medidor');
+            const barra = document.getElementById('barra-progresso');
+            const mensagem = document.getElementById('mensagem-final');
+
+            btn.style.display = 'none';
+            container.style.display = 'block';
+
+            let largura = 0;
+            const intervalo = setInterval(() => {
+                if (largura >= 100) {
+                    clearInterval(intervalo);
+                    mensagem.style.display = 'block';
+                    // Pequena animação de "estouro"
+                    mensagem.style.transform = 'scale(1.5)';
+                    mensagem.style.transition = '0.5s';
+                } else {
+                    largura++;
+                    barra.style.width = largura + '%';
+                    barra.innerHTML = largura + '%';
+                }
+            }, 30); // Velocidade do medidor
         }
-        setInterval(createHeart, 300);
     </script>
 </body>
 </html>
