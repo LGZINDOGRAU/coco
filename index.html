@@ -24,15 +24,15 @@
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 2rem 1rem 4rem;
+      padding: 1.5rem 1rem 4rem;
       overflow-x: hidden;
     }
 
-    /* Background stars */
     body::before {
       content: '';
       position: fixed;
@@ -49,17 +49,17 @@
 
     .container {
       width: 100%;
-      max-width: 480px;
+      max-width: 460px;
       position: relative;
       z-index: 1;
     }
 
     h1 {
       font-family: 'Syne', sans-serif;
-      font-size: 2rem;
+      font-size: clamp(1.6rem, 6vw, 2rem);
       font-weight: 800;
       letter-spacing: -0.03em;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -68,25 +68,26 @@
 
     .subtitle {
       color: var(--muted);
-      font-size: 0.85rem;
-      margin-bottom: 1.5rem;
+      font-size: 0.82rem;
+      margin-bottom: 1.25rem;
     }
 
     .search-row {
       display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
     }
 
     input {
       flex: 1;
+      min-width: 0;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 0.75rem 1rem;
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem;
+      font-size: 1rem;
       outline: none;
       transition: border-color 0.2s;
     }
@@ -98,14 +99,15 @@
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       border: none;
       border-radius: 12px;
-      padding: 0.75rem 1.2rem;
+      padding: 0.75rem 1.1rem;
       color: #fff;
       font-family: 'Syne', sans-serif;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       cursor: pointer;
       transition: opacity 0.2s, transform 0.1s;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     button:hover { opacity: 0.88; }
@@ -116,7 +118,7 @@
       border: 1px solid var(--border);
       color: var(--accent);
       font-size: 1.1rem;
-      padding: 0.75rem 1rem;
+      padding: 0.75rem 0.9rem;
     }
 
     .error {
@@ -134,8 +136,8 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
+      padding: 1.25rem;
+      margin-bottom: 0.9rem;
       animation: fadeUp 0.4s ease forwards;
       opacity: 0;
     }
@@ -147,41 +149,60 @@
 
     .main-weather {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
+      gap: 1rem;
       margin-bottom: 1rem;
     }
 
+    .weather-left { flex: 1; min-width: 0; }
+
     .city-name {
       font-family: 'Syne', sans-serif;
-      font-size: 1.4rem;
+      font-size: clamp(1.1rem, 4.5vw, 1.4rem);
       font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .country {
       color: var(--muted);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       margin-top: 0.1rem;
+    }
+
+    .weather-desc {
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-transform: capitalize;
+      margin-top: 0.3rem;
+    }
+
+    .weather-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* \u00cdCONE CORRIGIDO - usando img ao inv\u00e9s de emoji direto */
+    .weather-icon {
+      font-size: 2.8rem;
+      line-height: 1;
+      display: block;
+      text-align: right;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
     }
 
     .temp-big {
       font-family: 'Syne', sans-serif;
-      font-size: 4rem;
+      font-size: clamp(3rem, 10vw, 4rem);
       font-weight: 800;
       line-height: 1;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-    }
-
-    .weather-icon { font-size: 3rem; line-height: 1; }
-
-    .weather-desc {
-      color: var(--muted);
-      font-size: 0.9rem;
-      text-transform: capitalize;
-      margin-top: 0.25rem;
+      margin-top: 0.1rem;
     }
 
     .divider {
@@ -193,41 +214,41 @@
     .stats-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
+      gap: 0.6rem;
     }
 
     .stat {
       background: rgba(255,255,255,0.03);
       border-radius: 12px;
-      padding: 0.75rem 1rem;
+      padding: 0.7rem 0.9rem;
     }
 
     .stat-label {
       color: var(--muted);
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
     }
 
     .stat-value {
       font-family: 'Syne', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 700;
     }
 
     .section-title {
       font-family: 'Syne', sans-serif;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--muted);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.7rem;
     }
 
     .hourly-scroll {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.45rem;
       overflow-x: auto;
       padding-bottom: 0.25rem;
       scrollbar-width: none;
@@ -238,17 +259,22 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.3rem;
+      gap: 0.25rem;
       background: rgba(255,255,255,0.03);
       border-radius: 12px;
-      padding: 0.6rem 0.8rem;
-      min-width: 58px;
+      padding: 0.55rem 0.7rem;
+      min-width: 54px;
       flex-shrink: 0;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
     }
 
-    .hour-item .hi { color: var(--muted); font-size: 0.72rem; }
-    .hour-item .ht { font-family: 'Syne', sans-serif; font-weight: 700; }
+    .hour-item .hi { color: var(--muted); font-size: 0.68rem; }
+    .hour-item .hicon {
+      font-size: 1.4rem;
+      line-height: 1;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+    }
+    .hour-item .ht { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; }
 
     .skeleton {
       background: linear-gradient(90deg, var(--card) 25%, rgba(255,255,255,0.05) 50%, var(--card) 75%);
@@ -274,8 +300,8 @@
     .update-time {
       text-align: center;
       color: var(--muted);
-      font-size: 0.72rem;
-      margin-top: 0.5rem;
+      font-size: 0.7rem;
+      margin-top: 0.25rem;
     }
 
     #results { display: none; }
@@ -304,13 +330,13 @@
   <div id="results">
     <div class="card" style="animation-delay:0s">
       <div class="main-weather">
-        <div>
+        <div class="weather-left">
           <div class="city-name" id="cityName">\u2014</div>
           <div class="country" id="countryName"></div>
           <div class="weather-desc" id="weatherDesc">\u2014</div>
         </div>
-        <div style="text-align:right">
-          <div class="weather-icon" id="weatherIcon">\ud83c\udf24\ufe0f</div>
+        <div class="weather-right">
+          <span class="weather-icon" id="weatherIcon">\ud83c\udf24\ufe0f</span>
           <div class="temp-big" id="tempBig">\u2014\u00b0</div>
         </div>
       </div>
@@ -345,137 +371,22 @@
 </div>
 
 <script>
+  // Mapa WMO com emojis em texto (evita problemas de encoding)
   const WMO = {
-    0: ['\u2600\ufe0f','C\u00e9u limpo'], 1: ['\ud83c\udf24\ufe0f','Quase limpo'], 2: ['\u26c5','Parcialmente nublado'],
-    3: ['\u2601\ufe0f','Nublado'], 45: ['\ud83c\udf2b\ufe0f','N\u00e9voa'], 48: ['\ud83c\udf2b\ufe0f','N\u00e9voa com gelo'],
-    51: ['\ud83c\udf26\ufe0f','Garoa leve'], 53: ['\ud83c\udf26\ufe0f','Garoa moderada'], 55: ['\ud83c\udf27\ufe0f','Garoa intensa'],
-    61: ['\ud83c\udf27\ufe0f','Chuva leve'], 63: ['\ud83c\udf27\ufe0f','Chuva moderada'], 65: ['\ud83c\udf27\ufe0f','Chuva intensa'],
-    71: ['\ud83c\udf28\ufe0f','Neve leve'], 73: ['\ud83c\udf28\ufe0f','Neve moderada'], 75: ['\u2744\ufe0f','Neve intensa'],
-    80: ['\ud83c\udf26\ufe0f','Pancadas leves'], 81: ['\ud83c\udf29\ufe0f','Pancadas moderadas'], 82: ['\u26c8\ufe0f','Pancadas fortes'],
-    95: ['\u26c8\ufe0f','Tempestade'], 96: ['\u26c8\ufe0f','Tempestade c/ granizo'], 99: ['\u26c8\ufe0f','Tempestade forte']
-  };
-
-  function getWeatherInfo(code) {
-    return WMO[code] || ['\ud83c\udf21\ufe0f', 'Condi\u00e7\u00e3o desconhecida'];
-  }
-
-  function showError(msg) {
-    const el = document.getElementById('errorMsg');
-    el.textContent = msg;
-    el.style.display = 'block';
-    document.getElementById('results').style.display = 'none';
-    document.getElementById('loading').style.display = 'none';
-  }
-
-  function hideError() {
-    document.getElementById('errorMsg').style.display = 'none';
-  }
-
-  async function searchCity() {
-    const city = document.getElementById('cityInput').value.trim();
-    if (!city) return showError('Digite o nome de uma cidade!');
-    hideError();
-
-    document.getElementById('loading').style.display = 'flex';
-    document.getElementById('results').style.display = 'none';
-
-    try {
-      // Geocoding
-      const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=pt`);
-      const geoData = await geoRes.json();
-
-      if (!geoData.results || geoData.results.length === 0) {
-        return showError('Cidade n\u00e3o encontrada. Tente outro nome.');
-      }
-
-      const { latitude, longitude, name, country } = geoData.results[0];
-      await fetchWeather(latitude, longitude, name, country);
-    } catch (e) {
-      showError('Erro ao buscar dados. Verifique sua conex\u00e3o.');
-    }
-  }
-
-  async function getLocation() {
-    if (!navigator.geolocation) return showError('Geolocaliza\u00e7\u00e3o n\u00e3o suportada.');
-    hideError();
-    document.getElementById('loading').style.display = 'flex';
-    document.getElementById('results').style.display = 'none';
-
-    navigator.geolocation.getCurrentPosition(async pos => {
-      const { latitude, longitude } = pos.coords;
-      try {
-        // Reverse geocoding
-        const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/reverse?latitude=${latitude}&longitude=${longitude}&language=pt`);
-        const geoData = await geoRes.json();
-        const name = geoData.results?.[0]?.name || 'Sua localiza\u00e7\u00e3o';
-        const country = geoData.results?.[0]?.country || '';
-        await fetchWeather(latitude, longitude, name, country);
-      } catch {
-        await fetchWeather(latitude, longitude, 'Sua localiza\u00e7\u00e3o', '');
-      }
-    }, () => showError('Permiss\u00e3o de localiza\u00e7\u00e3o negada.'));
-  }
-
-  async function fetchWeather(lat, lon, cityName, country) {
-    try {
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
-        `&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code,visibility` +
-        `&hourly=temperature_2m,weather_code&timezone=auto&forecast_days=1`;
-
-      const res = await fetch(url);
-      const data = await res.json();
-      const cur = data.current;
-
-      // Main card
-      document.getElementById('cityName').textContent = cityName;
-      document.getElementById('countryName').textContent = country;
-
-      const [icon, desc] = getWeatherInfo(cur.weather_code);
-      document.getElementById('weatherIcon').textContent = icon;
-      document.getElementById('weatherDesc').textContent = desc;
-      document.getElementById('tempBig').textContent = Math.round(cur.temperature_2m) + '\u00b0C';
-      document.getElementById('feelsLike').textContent = Math.round(cur.apparent_temperature) + '\u00b0C';
-      document.getElementById('humidity').textContent = cur.relative_humidity_2m + '%';
-      document.getElementById('wind').textContent = Math.round(cur.wind_speed_10m) + ' km/h';
-
-      const vis = cur.visibility;
-      document.getElementById('visibility').textContent = vis >= 1000 ? (vis / 1000).toFixed(1) + ' km' : vis + ' m';
-
-      // Hourly
-      const now = new Date();
-      const hours = data.hourly.time;
-      const temps = data.hourly.temperature_2m;
-      const codes = data.hourly.weather_code;
-      const row = document.getElementById('hourlyRow');
-      row.innerHTML = '';
-
-      let count = 0;
-      for (let i = 0; i < hours.length && count < 12; i++) {
-        const t = new Date(hours[i]);
-        if (t < now) continue;
-        const [hIcon] = getWeatherInfo(codes[i]);
-        const hh = t.getHours().toString().padStart(2, '0') + 'h';
-        row.innerHTML += `
-          <div class="hour-item">
-            <span class="hi">${hh}</span>
-            <span>${hIcon}</span>
-            <span class="ht">${Math.round(temps[i])}\u00b0</span>
-          </div>`;
-        count++;
-      }
-
-      document.getElementById('updateTime').textContent =
-        'Atualizado em ' + now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-
-      document.getElementById('loading').style.display = 'none';
-      document.getElementById('results').style.display = 'block';
-
-      // Reset animation
-      document.querySelectorAll('.card').forEach(c => {
-        c.style.animation = 'none';
-        c.offsetHeight;
-        c.style.animation = '';
-      });
-
-    } catch (e) {
-      showError('Erro ao carregar dados do
+    0:  ['\u2600\uFE0F', 'C\u00e9u limpo'],
+    1:  ['\uD83C\uDF24\uFE0F', 'Quase limpo'],
+    2:  ['\u26C5', 'Parcialmente nublado'],
+    3:  ['\u2601\uFE0F', 'Nublado'],
+    45: ['\uD83C\uDF2B\uFE0F', 'N\u00e9voa'],
+    48: ['\uD83C\uDF2B\uFE0F', 'N\u00e9voa com gelo'],
+    51: ['\uD83C\uDF26\uFE0F', 'Garoa leve'],
+    53: ['\uD83C\uDF26\uFE0F', 'Garoa moderada'],
+    55: ['\uD83C\uDF27\uFE0F', 'Garoa intensa'],
+    61: ['\uD83C\uDF27\uFE0F', 'Chuva leve'],
+    63: ['\uD83C\uDF27\uFE0F', 'Chuva moderada'],
+    65: ['\uD83C\uDF27\uFE0F', 'Chuva intensa'],
+    71: ['\uD83C\uDF28\uFE0F', 'Neve leve'],
+    73: ['\uD83C\uDF28\uFE0F', 'Neve moderada'],
+    75: ['\u2744\uFE0F', 'Neve intensa'],
+    80: ['\uD83C\uDF26\uFE0F', 'Pancadas leves'],
+    81: [
